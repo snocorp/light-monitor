@@ -1,0 +1,4 @@
+cron:
+- description: Gather light data
+  url: /light
+  schedule: every 1 minutes

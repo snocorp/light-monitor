@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Light Monitor</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.6.0/metricsgraphics.min.css">
+  </head>
+  <body>
+    <h1>Light Monitor</h1>
+    <div id="lightChart"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.6.0/metricsgraphics.min.js"></script>
+    <script>
+
+      var ONE_WEEK_IN_SECONDS = 7 * 24 * 60 * 60;
+      var now = new Date();
+      var lightData = [];
+
+      var lightChart;
+      var since = Math.floor((new Date().getTime())/1000) - ONE_WEEK_IN_SECONDS;
+      var loadGraphData = function() {
+        var promise = $.get('/data/' + since);
+        promise.done(function (data) {
+          data = data.map(function (datum) {
+            if (datum.date > since) {
+              since = datum.date + 1;
+            }
+            return {time: new Date(datum.date * 1000), light: datum.light};
+          });
+
+          lightData = lightData.concat(data);
+
+          if (data.length > 0) {
+            lightChart = MG.data_graphic({
+              data: lightData,
+              width: 767,
+              height: 200,
+              target: "#lightChart",
+              x_accessor: "time",
+              y_accessor: "light",
+              interpolate: "basis"
+            });
+          }
+        });
+      };
+
+      setInterval(loadGraphData, 60000);
+      loadGraphData();
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /
+  upload: static/index.html
+  static_files: static/index.html
+- url: /data/(\d+)
+  script: data.app
+- url: /light
+  script: light.app
