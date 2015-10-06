@@ -1,4 +1,4 @@
 cron:
 - description: Gather light data
   url: /light
-  schedule: every 1 minutes
+  schedule: every 10 minutes
