@@ -30,4 +30,4 @@ class RequestLightData(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/light', RequestLightData),
-], debug=True)
+], debug=False)

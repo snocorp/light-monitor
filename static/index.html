@@ -5,7 +5,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.6.0/metricsgraphics.min.css">
   </head>
   <body>
-    <h1>Light Monitor</h1>
     <div id="lightChart"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
@@ -35,6 +34,7 @@
               data: lightData,
               width: 767,
               height: 200,
+              full_width: true,
               target: "#lightChart",
               x_accessor: "time",
               y_accessor: "light",

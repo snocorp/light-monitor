@@ -2,3 +2,7 @@ cron:
 - description: Gather light data
   url: /light
   schedule: every 10 minutes
+
+- description: Archive light data
+  url: /daily_archive/1
+  schedule: every day 00:00
